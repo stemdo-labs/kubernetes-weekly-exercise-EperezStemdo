@@ -1,0 +1,31 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: laravel-deploy
+  labels:
+    app: laravel
+spec:
+  selector:
+    matchLabels:
+      app: laravel
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: laravel
+    spec:
+      containers:
+      - name: laravel
+        image: bitnami/laravel:latest
+        env:
+          - name: DB_HOST
+            value: laravel-svc-2
+          - name: DB_PORT
+            value: "3306"
+          - name: DB_USERNAME
+            value: kubernetes
+          - name: DB_DATABASE
+            value: kubernetes
+              
+
+        

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-env
+  namespace: laravel
+data:
+  MYSQL_ROOT_PASSWORD: kubernetes
+  MYSQL_USER: kubernetes
+  MYSQL_PASSWORD: kubernetes
+  MYSQL_DATABASE: kubernetes
+  

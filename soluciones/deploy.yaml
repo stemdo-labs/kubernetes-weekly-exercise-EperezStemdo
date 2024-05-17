@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mariadb-deploy
+  namespace: laravel
+  labels:
+    app: laravel
+spec:
+  replicas: 1
+  selector: 
+    matchLabels:
+      app: laravel
+  template:
+    metadata:
+      labels:
+        app: laravel
+    spec:
+      containers:
+        - name: mysql
+          image: mysql:latest
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD 
+              valueFrom:
+                configMapKeyRef:
+                  name: mysql-env 
+                  key: MYSQL_ROOT_PASSWORD  
+
+            - name: MYSQL_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: mysql-env
+                  key: MYSQL_PASSWORD
+
+            - name: MYSQL_USER
+              valueFrom:
+                configMapKeyRef:
+                  name: mysql-env
+                  key: MYSQL_USER
+            
+            - name: MYSQL_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: mysql-env
+                  key: MYSQL_DATABASE 
+          
