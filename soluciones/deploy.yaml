@@ -4,20 +4,19 @@ metadata:
   name: mariadb-deploy
   namespace: laravel
   labels:
-    app: laravel
+    app: db
 spec:
-  replicas: 1
   selector: 
     matchLabels:
-      app: laravel
+      app: db
   template:
     metadata:
       labels:
-        app: laravel
+        app: db
     spec:
       containers:
         - name: mysql
-          image: mysql:latest
+          image: mysql:latest #bitnami/mariadb:latest  
           ports:
             - containerPort: 3306
           env:
@@ -43,5 +42,26 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   name: mysql-env
-                  key: MYSQL_DATABASE 
+                  key: MYSQL_DATABASE
+
+            # - name: ALLOW_EMPTY_PASSWORD 
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       name: mysql-env 
+            #       key: ALLOW_EMPTY_PASSWORD  
+
+            # - name: MARIADB_USER
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       name: mysql-env
+            #       key: MARIADB_USER
+
+            # - name: MARIADB_DATABASE
+            #   valueFrom:
+            #     configMapKeyRef:
+            #       name: mysql-env
+            #       key: MARIADB_DATABASE
+          
+
+             
           

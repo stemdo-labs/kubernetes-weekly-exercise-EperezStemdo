@@ -8,4 +8,6 @@ data:
   MYSQL_USER: kubernetes
   MYSQL_PASSWORD: kubernetes
   MYSQL_DATABASE: kubernetes
-  
+  # ALLOW_EMPTY_PASSWORD: "yes"
+  # MARIADB_USER: "bn_myapp"
+  # MARIADB_DATABASE: "bitnami_myapp"
