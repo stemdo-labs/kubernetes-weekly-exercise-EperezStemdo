@@ -1,10 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: phpmyadmin
+  name: phpmyadmin-deploy
   namespace: phpmyadmin
 spec:
-  replicas: 1
   selector:
     matchLabels:
       app: phpmyadmin
@@ -23,22 +22,22 @@ spec:
           valueFrom:
             configMapKeyRef:
               name: phpmyadmin-configmap
-              key: database_host
+              key: host
 
         - name: PMA_PORT
           valueFrom:
             configMapKeyRef:
               name: phpmyadmin-configmap
-              key: database_port
+              key: port
 
         - name: PMA_USER
           valueFrom:
             configMapKeyRef:
               name: phpmyadmin-configmap
-              key: database_user
+              key: user
               
         - name: PMA_PASSWORD
           valueFrom:
             secretKeyRef:
               name: phpmyadmin-secret
-              key: database_password
+              key: password

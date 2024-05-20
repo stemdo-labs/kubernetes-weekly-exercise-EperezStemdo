@@ -4,7 +4,7 @@ metadata:
   name: phpmyadmin-configmap
   namespace: phpmyadmin 
 data:
-  database_user: usuario
-  database_name: mariadb
-  database_host: mariadb-svc.laravel.svc.cluster.local
-  database_port: "3306"
+  user: usuario
+  name: mariadb
+  host: mariadb-svc.laravel.svc.cluster.local
+  port: "3306"
