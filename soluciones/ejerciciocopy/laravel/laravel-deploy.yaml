@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: laravel-deployment
+  namespace: laravel
+spec:
+  selector:
+    matchLabels:
+      app: laravel
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: laravel
+    spec:
+      containers:
+      - name: laravel
+        ports:
+        - containerPort: 8000
+        image: bitnami/laravel:11.0.8
+        env:
+        - name: LARAVEL_DATABASE_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: mariadb-config
+              key: database_host
+        - name: LARAVEL_DATABASE_PORT_NUMBER
+          valueFrom:
+            configMapKeyRef:
+              name: mariadb-config
+              key: database_port
+        - name: LARAVEL_DATABASE_USER
+          valueFrom:
+            configMapKeyRef:
+              name: mariadb-config
+              key: database_user
+        - name: LARAVEL_DATABASE_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: mariadb-config
+              key: database_name
+        - name: LARAVEL_DATABASE_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mariadb-secret
+              key: database_password

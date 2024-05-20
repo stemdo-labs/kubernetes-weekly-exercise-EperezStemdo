@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: phpmyadmin
+  namespace: phpmyadmin
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: phpmyadmin
+  template:
+    metadata:
+      labels:
+        app: phpmyadmin
+    spec:
+      containers:
+      - name: phpmyadmin
+        image: phpmyadmin:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: PMA_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: phpmyadmin-config
+              key: database_host
+        - name: PMA_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: phpmyadmin-config
+              key: database_port
+        - name: PMA_USER
+          valueFrom:
+            configMapKeyRef:
+              name: phpmyadmin-config
+              key: database_user
+        - name: PMA_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: phpmyadmin-secret
+              key: database_password
