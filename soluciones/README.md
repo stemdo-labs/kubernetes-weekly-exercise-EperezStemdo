@@ -2,9 +2,9 @@
 
 ## Apartado 1
 
-Para la realización del ejercicio se han hecho dos deployments, uno para la base de datos MySQL y otro para la aplicación de laravel. Para ello se han utilizado las imágenes oficiales en sus últimas versiones. Éstas han sido: 
-- ``mysql`` (https://hub.docker.com/_/mysql)
-- ``bitnami:laravel`` (https://hub.docker.com/r/bitnami/laravel)
+Para la realización del ejercicio se han hecho dos deployments, uno para la base de datos mariadb y otro para la aplicación de laravel. Para ello se han utilizado las imágenes oficiales en sus últimas versiones. Éstas han sido: 
+- ``mariadb`` 
+- ``bitnami:laravel`` 
 
 Se ha hecho un seguimiento de la documentación para configurar las variables de entorno.
 
@@ -18,7 +18,13 @@ Para ello se utiliza el comando:
 kubectl create namespace laravel
 ```
 
-### Creación del deployment y servicio de MySQL
+### Creación del deployment y servicio de mariadb
+
+Enla carpeta donde se encuentran los recursos de mariadb:
+
+```
+kubectl apply -f .
+```
 
 Se crea un deployment para la base de datos. Se ha hecho uso de ConfigMap para las variables de entorno y se han utilizado secretos para las contraseñas.
 
@@ -30,6 +36,12 @@ Se comprueba a través de los logs que la base de datos funciona de manera corre
 
 
 ### Creación del deployment y servicio de Laravel
+
+Enla carpeta donde se encuentran los recursos de laravel:
+
+```
+kubectl apply -f .
+```
 
 Se crean tanto el depoyment como el servicio de Laravel, en este caso de tipo NodePort.
 
@@ -57,3 +69,8 @@ Se crea un deployment y un service con las variables de entorno sacadas de la do
 Una vez creados los recursos se comprueba en el navegador que todo está funcionando correctamente.
 
 ![](./eperez/imgs/05-php-works.png)
+
+
+## Límites
+
+![](./eperez/imgs/06-limits.png)

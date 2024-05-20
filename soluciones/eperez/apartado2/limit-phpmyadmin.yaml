@@ -1,8 +1,8 @@
 apiVersion: v1
 kind: LimitRange
 metadata:
-  name: limit-ns-laravel
-  namespace: laravel
+  name: limit-ns-phmmyadmin
+  namespace: phpmyadmin
 spec:
   limits:
     - default:
@@ -15,5 +15,3 @@ spec:
         cpu: "300m"
         memory: "256Mi"
       type: Container
-
-
